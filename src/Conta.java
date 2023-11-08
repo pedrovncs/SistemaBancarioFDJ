@@ -3,11 +3,11 @@ public class Conta extends Produto {
     private String numero;
     private Double saldo;
     private String tipo;
-    private static final String codigoFixo = "CONTA";
-    private static final String descricaoFixa = "Conta bancária";
+    private static final String CODIGOFIXO = "CONTA";
+    private static final String DESCRICAOFIXA = "Conta bancária";
 
     public Conta(String numero, Agencia agencia, String tipo){
-        super(descricaoFixa, codigoFixo);
+        super(DESCRICAOFIXA, CODIGOFIXO);
         this.numero = numero;
         this.tipo = tipo;
         this.agencia = agencia;

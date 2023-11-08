@@ -1,11 +1,11 @@
 public class ChequeEspecial extends Produto {
     private double limite;
     private double taxaDeJuros;
-    private static final String codigoFixo = "CHEQUEESPECIAL";
-    private static final String descricaoFixa = "Cheque Especial";
+    private static final String CODIGOFIXO = "CHEQUEESPECIAL";
+    private static final String DESCRICAOFIXA = "Cheque Especial";
 
     public ChequeEspecial(double limite, double taxaDeJuros) {
-        super(descricaoFixa, codigoFixo);
+        super(DESCRICAOFIXA, CODIGOFIXO);
         this.limite = limite;
         this.taxaDeJuros = taxaDeJuros;
     }

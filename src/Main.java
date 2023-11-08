@@ -1,7 +1,7 @@
 public class Main {
     public static void main(String[] args) {
         Banco banco1 = new Banco("Banco do Brasil");
-        Agencia agencia1 = new Agencia("0001");
+        /*Agencia agencia1 = new Agencia("0001");
         Conta conta1 = new Conta( "123456", agencia1, "corrente");
         Cartao cartao1 = new Cartao(5000);
         ChequeEspecial chequeEspecial1 = new ChequeEspecial(1000,12.3);
@@ -63,6 +63,6 @@ public class Main {
         System.out.println("----Cheque especial pago----");
         System.out.println("Novo limite do cheque especial: " + chequeEspecial1.getLimite());
 
-
+*/
     }
 }
