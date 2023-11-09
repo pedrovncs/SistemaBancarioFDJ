@@ -86,10 +86,28 @@ public class MenuCriar extends TerminalOption {
                         break;
                     }
                     Banco banco = Banco.bancos.get(Integer.parseInt(selected) - 1);
-                    System.out.println("Digite o tipo da conta: ");
+                    System.out.println("Escolha o tipo da conta: ");
+                    System.out.println("1 - Conta corrente");
+                    System.out.println("2 - Conta poupança");
+                    System.out.println("3 - Conta salário");
                     String tipoConta = scanner.nextLine();
+                    switch (tipoConta){
+                        case "1":
+                            tipoConta = "corrente";
+                            break;
+                        case "2":
+                            tipoConta = "poupança";
+                            break;
+                        case "3":
+                            tipoConta = "salário";
+                            break;
+                        default:
+                            System.out.println("\n Opção inválida \n");
+                            break;
+                    }
+
                     cliente.abrirConta(tipoConta, banco);
-                    System.out.println("\n Conta criada com sucesso! \n");
+                    System.out.println("Conta " + tipoConta +  "\n criada com sucesso! \n");
                     break;
                 }
                 case "5": {
