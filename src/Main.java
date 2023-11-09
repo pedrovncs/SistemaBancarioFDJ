@@ -1,15 +1,77 @@
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
-        Banco banco1 = new Banco("Banco do Brasil");
-        banco1.criarAgencia("0001");
-        banco1.criarAgencia("0002");
-        System.out.println("Nome do banco: " + banco1.getNome());
-        System.out.println("Lista de agências do banco: ");
-        for (Agencia agencia : banco1.getAgencias()) {
-            System.out.println(agencia.getNumero());
+        Scanner scanner = new Scanner(System.in);
+        String selected = "";
+        while (!selected.equals("0")) {
+            System.out.println("Bem vindo ao sistema bancario ");
+            System.out.println("Selecione uma opção: ");
+            System.out.println("1 - Criar banco");
+            System.out.println("2 - Criar agencia");
+            System.out.println("3 - Criar cliente");
+            System.out.println("4 - Criar cartão");
+            System.out.println("5 - Criar cheque especial");
+            System.out.println("6 - Criar conta");
+            System.out.println("7 - TESTE");
+            System.out.println("0 - Sair");
+            selected = scanner.nextLine();
+            switch (selected) {
+                case "1": {
+                    System.out.println("Digite o nome do banco: ");
+                    String nome = scanner.nextLine();
+                    Banco banco = new Banco(nome);
+                    System.out.println("\n Banco criado com sucesso! \n ");
+                    break;
+                }
+                case "2": {
+                    if (Banco.bancos.isEmpty()) {
+                        System.out.println("\n ERRO: Não existem bancos cadastrados! \n");
+                        break;
+                    }
+                    System.out.println("Selecione um banco: ");
+                    for (int i = 0; i < Banco.bancos.size(); i++) {
+                        System.out.println(i + 1 + " - " + Banco.bancos.get(i).getNome());
+                    }
+                        selected = scanner.nextLine();
+                        Banco banco = Banco.bancos.get(Integer.parseInt(selected) - 1);
+                        System.out.println("Insira o número da agencia: ");
+                        String numero = scanner.nextLine();
+                        banco.criarAgencia(numero);
+                        System.out.println("\n Agencia criada com sucesso! \n ");
+                        break;
+                }
+                case "3":{
+                    System.out.println("Digite o nome do cliente: ");
+                    String nome = scanner.nextLine();
+                    System.out.println("Digite o cpf do cliente: ");
+                    String cpf = scanner.nextLine();
+                    Cliente cliente = new Cliente(nome, cpf);
+                    System.out.println("\n Cliente criado com sucesso! \n ");
+                    break;
+                }
+                case "4", "5", "6":{
+                    System.out.println("\n Ainda não implementado \n");
+                    break;
+                }
+                case "0":{
+                    System.out.println("\n ENCERRADO \n");
+                    break;
+                }
+                default:{
+                    System.out.println("\n Opção inválida! \n");
+                    break;
+                }
+            }
         }
-        System.out.println((banco1.getAgencias().get(0)).getBanco().getNome());
-        //INCEPTION KKKKKKKK
+
+
+        for (Banco banco : Banco.bancos) {
+            System.out.println(banco.getNome());
+        }
+        System.out.println(Banco.bancos.get(0).getAgencias().get(0).getNumero());
+
+
         /*Agencia agencia1 = new Agencia("0001");
         Conta conta1 = new Conta( "123456", agencia1, "corrente");
         Cartao cartao1 = new Cartao(5000);

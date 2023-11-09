@@ -4,7 +4,6 @@ import java.util.ArrayList;
 public class Cliente {
     private String nome;
     private String cpf;
-
     private List<Produto> produtos;
 
     public Cliente(String nome, String cpf){

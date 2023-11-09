@@ -3,6 +3,7 @@ import java.util.ArrayList;
 
 public class Banco {
     private String nome;
+    public static List<Banco> bancos = new ArrayList<Banco>();
     private List<Agencia> agencias;
     private List<Produto> produtos;
 
@@ -10,6 +11,7 @@ public class Banco {
         this.nome = nome;
         this.agencias = new ArrayList<Agencia>();
         this.produtos = new ArrayList<Produto>();
+        bancos.add(this);
     }
 
     public String getNome(){
