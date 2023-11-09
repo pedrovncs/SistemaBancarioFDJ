@@ -31,7 +31,15 @@ public class Banco {
         this.agencias.add(agencia);
     }
 
+    public void removerAgencia(Agencia agencia){
+        this.agencias.remove(agencia);
+    }
+
     public void addProduto(Produto produto) {
         this.produtos.add(produto);
+    }
+
+    public void removerProduto(Produto produto) {
+        this.produtos.remove(produto);
     }
 }

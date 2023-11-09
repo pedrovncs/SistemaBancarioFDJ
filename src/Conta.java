@@ -1,17 +1,20 @@
 public class Conta extends Produto {
-    private Agencia agencia;
-    private String numero;
+    private Banco banco;
+    private String numero = String.valueOf((int) Math.floor(Math.random() * 1000));
     private Double saldo;
     private String tipo;
     private static final String CODIGOFIXO = "CONTA";
     private static final String DESCRICAOFIXA = "Conta bancária";
 
-    public Conta(String numero, Agencia agencia, String tipo){
-        super(DESCRICAOFIXA, CODIGOFIXO);
-        this.numero = numero;
+    public Conta(String tipo, Banco banco, Cliente cliente){
+        super(DESCRICAOFIXA, CODIGOFIXO, cliente);
         this.tipo = tipo;
-        this.agencia = agencia;
+        this.banco = banco;
         this.saldo = 0.0;
+    }
+
+    public Banco getBanco(){
+        return this.banco;
     }
 
     public String getNumero(){
@@ -20,10 +23,6 @@ public class Conta extends Produto {
 
     public String getTipo(){
         return this.tipo;
-    }
-
-    public Agencia getAgencia(){
-        return this.agencia;
     }
 
     public Double getSaldo(){
@@ -37,6 +36,7 @@ public class Conta extends Produto {
     public void sacar(Double valor){
         this.saldo -= valor;
     }
+
 
     public void transferir(Conta conta, Double valor){
         this.sacar(valor);

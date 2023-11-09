@@ -1,15 +1,20 @@
 public class ChequeEspecial extends Produto {
     private double limite;
     private double taxaDeJuros;
+    private Banco banco;
     private static final String CODIGOFIXO = "CHEQUEESPECIAL";
     private static final String DESCRICAOFIXA = "Cheque Especial";
 
-    public ChequeEspecial(double limite, double taxaDeJuros) {
-        super(DESCRICAOFIXA, CODIGOFIXO);
+    public ChequeEspecial(double limite, double taxaDeJuros, Banco banco, Cliente cliente) {
+        super(DESCRICAOFIXA, CODIGOFIXO,cliente);
+        this.banco = banco;
         this.limite = limite;
         this.taxaDeJuros = taxaDeJuros;
     }
 
+    public Banco getBanco() {
+        return this.banco;
+    }
     public double getLimite() {
         return this.limite;
     }

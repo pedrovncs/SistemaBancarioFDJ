@@ -1,15 +1,17 @@
 public class Cartao extends Produto{
-    private double limite;
-    private final String numero = (int) Math.floor(Math.random() * 100000) + "";
+    private double limite = Math.random() * 10000;
+    private final String numero = String.valueOf((int) Math.floor(Math.random() * 100000));
     private boolean debito;
     private boolean credito;
     private double fatura;
+    private Banco banco;
     private static final String codigoFixo = "CARTAO";
     private static final String descricaoFixa = "Cartão de crédito e/ou débito";
 
-    public Cartao(double limite){
-        super(descricaoFixa, codigoFixo);
-        this.limite = limite;
+    public Cartao(Banco banco, Cliente cliente){
+        super(descricaoFixa, codigoFixo, cliente);
+        this.banco = banco;
+        this.cliente = cliente;
         this.credito = false;
         this.debito = true;
     }
@@ -22,12 +24,23 @@ public class Cartao extends Produto{
         return this.limite;
     }
 
-    public boolean getDebito(){
-        return this.debito;
+    public String getDebito(){
+        if (this.debito){
+            return "Habilitado";
+        }
+        return "Desabilitado";
+
     }
 
-    public boolean getCredito(){
-        return this.credito;
+    public String getCredito(){
+        if (this.credito){
+            return "Habilitado";
+        }
+        return "Desabilitado";
+    }
+
+    public Banco getBanco(){
+        return this.banco;
     }
 
     public double getFatura(){
