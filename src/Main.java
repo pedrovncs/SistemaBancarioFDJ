@@ -1,6 +1,15 @@
 public class Main {
     public static void main(String[] args) {
         Banco banco1 = new Banco("Banco do Brasil");
+        banco1.criarAgencia("0001");
+        banco1.criarAgencia("0002");
+        System.out.println("Nome do banco: " + banco1.getNome());
+        System.out.println("Lista de agências do banco: ");
+        for (Agencia agencia : banco1.getAgencias()) {
+            System.out.println(agencia.getNumero());
+        }
+        System.out.println((banco1.getAgencias().get(0)).getBanco().getNome());
+        //INCEPTION KKKKKKKK
         /*Agencia agencia1 = new Agencia("0001");
         Conta conta1 = new Conta( "123456", agencia1, "corrente");
         Cartao cartao1 = new Cartao(5000);

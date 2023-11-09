@@ -1,6 +1,6 @@
 public class Cartao extends Produto{
     private double limite;
-    private static final String numero = (int) Math.floor(Math.random() * 100000) + "";
+    private final String numero = (int) Math.floor(Math.random() * 100000) + "";
     private boolean debito;
     private boolean credito;
     private double fatura;

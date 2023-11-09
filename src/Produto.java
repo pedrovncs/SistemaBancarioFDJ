@@ -1,6 +1,6 @@
 public abstract class Produto {
-    private final String descricao;
-    private final String codigo;
+    protected final String descricao;
+    protected final String codigo;
 
     public Produto( String descricao, String codigo){
         this.descricao = descricao;

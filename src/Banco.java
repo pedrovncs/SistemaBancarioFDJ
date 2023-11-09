@@ -24,7 +24,8 @@ public class Banco {
         return this.produtos;
     }
 
-    public void addAgencia(Agencia agencia){
+    public void criarAgencia(String numero){
+        Agencia agencia = new Agencia(this, numero);
         this.agencias.add(agencia);
     }
 
