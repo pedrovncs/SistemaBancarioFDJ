@@ -13,5 +13,5 @@ O objetivo é implementar o projeto do diagrama UML abaixo, utilizando o conteú
 ![App Screenshot](https://i.imgur.com/qEMvDP7.png)
 
 
-![Logo](https://i.imgur.com/aAuhrsP.gif)
+![Logo](https://i.imgur.com/J5Qt6ab.png)
 
