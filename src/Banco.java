@@ -11,7 +11,7 @@ public class Banco {
         this.nome = nome;
         this.agencias = new ArrayList<Agencia>();
         this.produtos = new ArrayList<Produto>();
-        bancos.add(this);
+        this.bancos.add(this);
     }
 
     public String getNome(){

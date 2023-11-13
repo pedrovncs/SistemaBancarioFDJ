@@ -9,6 +9,7 @@ public class MenuConsultar extends TerminalOption {
             System.out.println("O que você deseja consultar?");
             System.out.println("1 - Banco");
             System.out.println("2 - Cliente");
+            System.out.println("3 - Empresa");
             System.out.println("0 - Voltar");
             selected = scanner.nextLine();
             switch (selected) {
@@ -37,7 +38,9 @@ public class MenuConsultar extends TerminalOption {
                     for (int i = 0; i < banco.getProdutos().size(); i++) {
                         System.out.println(" - " + banco.getProdutos().get(i).getCodigo() + " - " + banco.getProdutos().get(i).getDescricao());
                     }
-                    System.out.println("00 - Mais informações.");
+                    if (!banco.getProdutos().isEmpty()) {
+                        System.out.println("00 - Mais informações.");
+                    }
                     System.out.println("0 - Voltar");
                     selected = scanner.nextLine();
                     if (selected.equals("0")) {
@@ -71,16 +74,16 @@ public class MenuConsultar extends TerminalOption {
                             System.out.println("Limite: " + cartao.getLimite());
                             System.out.println("Cliente: " + cartao.getCliente().getNome());
                         }
-                        if (produto instanceof ChequeEspecial){
+                        if (produto instanceof ChequeEspecial) {
                             ChequeEspecial chequeEspecial = (ChequeEspecial) produto;
                             System.out.println("Limite: " + chequeEspecial.getLimite());
                             System.out.println("Taxa de Juros: " + chequeEspecial.getTaxaDeJuros());
                             System.out.println("Cliente: " + chequeEspecial.getCliente().getNome());
                         }
-                    break;
                     }
+                    break;
                 }
-                case "2":{
+                case "2": {
                     System.out.println("Selecione o cliente: ");
                     if (Cliente.clientes.isEmpty()) {
                         System.out.println("\n ERRO: Não há clientes cadastrados \n");
@@ -103,14 +106,16 @@ public class MenuConsultar extends TerminalOption {
                         System.out.println(" - " + cliente.getProdutos().get(i).getCodigo() +
                                 " - " + cliente.getProdutos().get(i).getDescricao());
                     }
-                    System.out.println("00 - Mais informações.");
+                    if (!cliente.getProdutos().isEmpty()) {
+                        System.out.println("00 - Mais informações.");
+                    }
                     System.out.println("0 - Voltar");
                     selected = scanner.nextLine();
                     if (selected.equals("0")) {
                         System.out.println("-> Retorno a tela anterior");
                         break;
                     }
-if (selected.equals("00")) {
+                    if (selected.equals("00")) {
                         System.out.println("Selecione o produto: ");
                         for (int i = 0; i < cliente.getProdutos().size(); i++) {
                             System.out.println(i + 1 + " - " + cliente.getProdutos().get(i).getCodigo() +
@@ -147,6 +152,34 @@ if (selected.equals("00")) {
                     }
                     break;
                 }
+                case "3": {
+                    if (Empresa.empresas.isEmpty()) {
+                        System.out.println("\n ERRO: Não há empresas cadastradas \n");
+                        break;
+                    }
+                    System.out.println("Selecione a empresa: ");
+                    for (int i = 0; i < Empresa.empresas.size(); i++) {
+                        System.out.println(i + 1 + " - " + Empresa.empresas.get(i).getNome());
+                    }
+                    System.out.println("0 - Voltar");
+                    selected = scanner.nextLine();
+                    if (selected.equals("0")) {
+                        System.out.println("-> Retorno a tela anterior");
+                        break;
+                    }
+                    Empresa empresa = Empresa.empresas.get(Integer.parseInt(selected) - 1);
+                    System.out.println("Nome: " + empresa.getNome());
+                    System.out.println("CNPJ: " + empresa.getCnpj());
+                    System.out.println("Funcionarios: ");
+                    if (empresa.getFuncionarios().isEmpty()) {
+                        System.out.println(" - Não há funcionários cadastrados");
+                        break;
+                    } else {
+                        for (int i = 0; i < empresa.getFuncionarios().size(); i++) {
+                            System.out.println(" - " + empresa.getFuncionarios().get(i).getNome());
+                        }
+                    }
+                }
                 case "0": {
                     System.out.println("-> Retorno a tela anterior");
                     break;
@@ -159,4 +192,3 @@ if (selected.equals("00")) {
         }
     }
 }
-

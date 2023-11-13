@@ -1,10 +1,10 @@
 import java.util.Scanner;
+import java.util.List;
 
 public class MenuRemover extends TerminalOption {
     Scanner scanner = new Scanner(System.in);
 
     public void executar(String selected) {
-        Integer index;
         while (!selected.equals("0")) {
             System.out.println("MENU REMOVER");
             System.out.println("Selecione uma opção: ");
@@ -14,108 +14,148 @@ public class MenuRemover extends TerminalOption {
             System.out.println("4 - Remover Produto");
             System.out.println("0 - Voltar");
             selected = scanner.nextLine();
-            switch (selected){
-                case "1":{
-                    System.out.println("Qual banco deseja remover: ");
-                    for (int i = 0; i < Banco.bancos.size(); i++){
-                        System.out.println( i + 1 + " - " + Banco.bancos.get(i).getNome());
-                    }
-                    System.out.println("0 - Voltar");
-                    selected = scanner.nextLine();
-                    if (selected.equals("0")){
-                        System.out.println("-> Retorno a tela anterior");
-                        break;
-                    }
-                    index = Integer.parseInt(selected) - 1;
-                    Banco.bancos.remove(index);
-                    System.out.println( Banco.bancos.get(index).getNome() + " removido com sucesso");
+
+            switch (selected) {
+                case "1":
+                    removerBanco();
                     break;
-                }
-                case "2":{
-                    System.out.println("A qual banco a agencia pertence:  ");{
-                        for (int i = 0; i < Banco.bancos.size(); i++){
-                            System.out.println( i + 1 + " - " + Banco.bancos.get(i).getNome());
-                        }
-                        System.out.println("0 - Voltar");
-                        selected = scanner.nextLine();
-                        if (selected.equals("0")){
-                            System.out.println("-> Retorno a tela anterior");
-                            break;
-                        }
-                        index = Integer.parseInt(selected) - 1;
-                        Banco banco = Banco.bancos.get(index);
-                        if (banco.getAgencias().isEmpty()){
-                            System.out.println("Não há agencias cadastradas neste banco.");
-                            break;
-                        }
-                        System.out.println("Qual agencia deseja remover: ");
-                        for (int i = 0; i < banco.getAgencias().size(); i++){
-                            System.out.println( i + 1 + " - " + banco.getAgencias().get(i).getNumero());
-                        }
-                        selected = scanner.nextLine();
-                        index = Integer.parseInt(selected) - 1;
-                        banco.removerAgencia(banco.getAgencias().get(index));
-                        System.out.println("Agencia: " + banco.getAgencias().get(index).getNumero() + "removida com sucesso");
-                        break;
-                    }
-                }
-                case "3":{
-                    if (Cliente.clientes.isEmpty()){
-                        System.out.println("Não há clientes cadastrados.");
-                        break;
-                    }
-                    System.out.println("Qual cliente deseja remover: ");
-                    for (int i = 0; i < Cliente.clientes.size(); i++){
-                        System.out.println( i + 1 + " - " + Cliente.clientes.get(i).getNome());
-                    }
-                    System.out.println("0 - Voltar");
-                    selected = scanner.nextLine();
-                    if (selected.equals("0")){
-                        System.out.println("-> Retorno a tela anterior");
-                        break;
-                    }
-                    index = Integer.parseInt(selected) - 1;
-                    Cliente.clientes.remove(index);
-                    System.out.println( Cliente.clientes.get(index).getNome() + " removido com sucesso");
+                case "2":
+                    removerAgencia();
                     break;
-                }
-                case "4":{
-                    System.out.println("De qual cliente deseja remover o produto: ");
-                    for (int i = 0; i < Cliente.clientes.size(); i++){
-                        System.out.println( i + 1 + " - " + Cliente.clientes.get(i).getNome());
-                    }
-                    System.out.println("0 - Voltar");
-                    selected = scanner.nextLine();
-                    if (selected.equals("0")){
-                        System.out.println("-> Retorno a tela anterior");
-                        break;
-                    }
-                    index = Integer.parseInt(selected) - 1;
-                    Cliente cliente = Cliente.clientes.get(index);
-                    if (cliente.getProdutos().isEmpty()){
-                        System.out.println("Não há produtos cadastrados para este cliente.");
-                        break;
-                    }
-                    System.out.println("Qual produto deseja remover: ");
-                    for (int i = 0; i < cliente.getProdutos().size(); i++){
-                        System.out.println( i + 1 + " - " + cliente.getProdutos().get(i).getCodigo() +
-                                cliente.getProdutos().get(i).getDescricao() +
-                                " - " + cliente.getProdutos().get(i).getBanco().getNome());
-                    }
-                    selected = scanner.nextLine();
-                    index = Integer.parseInt(selected) - 1;
-                    cliente.getProdutos().remove(index);
-                    System.out.println("Produto: " + cliente.getProdutos().get(index).getCodigo() + "removido com sucesso");
+                case "3":
+                    removerCliente();
                     break;
-                }
-                default:{
+                case "4":
+                    removerProduto();
+                    break;
+                default:
                     System.out.println("Opção inválida");
                     break;
-                }
-
             }
-
         }
     }
-}
 
+    private void removerBanco() {
+        if (Banco.bancos.isEmpty()) {
+            System.out.println("Erro: Não há bancos cadastrados. Nenhum banco removido.");
+            return;
+        }
+
+        System.out.println("Qual banco deseja remover: ");
+        listarElementos(Banco.bancos);
+
+        Banco bancoSelecionado = obterObjeto(Banco.bancos);
+        if (bancoSelecionado != null) {
+            Banco.bancos.remove(bancoSelecionado);
+            System.out.println("Banco removido com sucesso");
+        } else {
+            System.out.println("Erro: Banco não encontrado. Nenhum banco removido.");
+        }
+    }
+
+    private void removerAgencia() {
+        if (Banco.bancos.isEmpty()) {
+            System.out.println("Erro: Não há bancos cadastrados. Nenhuma agência removida.");
+            return;
+        }
+
+        System.out.println("A qual banco a agência pertence: ");
+        listarElementos(Banco.bancos);
+
+        Banco bancoSelecionado = obterObjeto(Banco.bancos);
+        if (bancoSelecionado != null) {
+            if (bancoSelecionado.getAgencias().isEmpty()) {
+                System.out.println("Erro: Não há agências cadastradas neste banco. Nenhuma agência removida.");
+                return;
+            }
+
+            System.out.println("Qual agência deseja remover: ");
+            listarElementos(bancoSelecionado.getAgencias());
+
+            Agencia agenciaSelecionada = obterObjeto(bancoSelecionado.getAgencias());
+            if (agenciaSelecionada != null) {
+                bancoSelecionado.removerAgencia(agenciaSelecionada);
+                System.out.println("Agência removida com sucesso");
+            } else {
+                System.out.println("Erro: Agência não encontrada. Nenhuma agência removida.");
+            }
+        } else {
+            System.out.println("Erro: Banco não encontrado. Nenhuma agência removida.");
+        }
+    }
+
+    private void removerCliente() {
+        if (Cliente.clientes.isEmpty()) {
+            System.out.println("Erro: Não há clientes cadastrados. Nenhum cliente removido.");
+            return;
+        }
+
+        System.out.println("Qual cliente deseja remover: ");
+        listarElementos(Cliente.clientes);
+
+        Cliente clienteSelecionado = obterObjeto(Cliente.clientes);
+        if (clienteSelecionado != null) {
+            Cliente.clientes.remove(clienteSelecionado);
+            System.out.println("Cliente removido com sucesso");
+        } else {
+            System.out.println("Erro: Cliente não encontrado. Nenhum cliente removido.");
+        }
+    }
+
+    private void removerProduto() {
+        if (Cliente.clientes.isEmpty()) {
+            System.out.println("Erro: Não há clientes cadastrados. Nenhum produto removido.");
+            return;
+        }
+
+        System.out.println("De qual cliente deseja remover o produto: ");
+        listarElementos(Cliente.clientes);
+
+        Cliente clienteSelecionado = obterObjeto(Cliente.clientes);
+        if (clienteSelecionado != null) {
+            List<Produto> produtosCliente = clienteSelecionado.getProdutos();
+
+            if (produtosCliente.isEmpty()) {
+                System.out.println("Erro: Não há produtos cadastrados para este cliente. Nenhum produto removido.");
+                return;
+            }
+
+            System.out.println("Qual produto deseja remover: ");
+            listarElementos(produtosCliente);
+
+            Produto produtoSelecionado = obterObjeto(produtosCliente);
+            if (produtoSelecionado != null) {
+                produtosCliente.remove(produtoSelecionado);
+                System.out.println("Produto removido com sucesso");
+            } else {
+                System.out.println("Erro: Produto não encontrado. Nenhum produto removido.");
+            }
+        } else {
+            System.out.println("Erro: Cliente não encontrado. Nenhum produto removido.");
+        }
+    }
+
+    private <T> T obterObjeto(List<T> elementos) {
+        int index = obterIndice();
+        if (index >= 0 && index < elementos.size()) {
+            return elementos.get(index);
+        }
+        return null;
+    }
+
+    private void listarElementos(List<?> elementos) {
+        for (int i = 0; i < elementos.size(); i++) {
+            System.out.println(i + 1 + " - " + elementos.get(i).toString());
+        }
+        System.out.println("0 - Voltar");
+    }
+
+    private int obterIndice() {
+        String selected = scanner.nextLine();
+        if (selected.equals("0")) {
+            System.out.println("-> Retorno a tela anterior");
+            return -1;
+        }
+        return Integer.parseInt(selected) - 1;
+    }
+}

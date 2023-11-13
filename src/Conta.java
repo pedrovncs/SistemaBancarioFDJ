@@ -1,8 +1,12 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class Conta extends Produto {
     private Banco banco;
     private String numero = String.valueOf((int) Math.floor(Math.random() * 1000));
     private Double saldo;
     private String tipo;
+    public static List<Conta> contas = new ArrayList<Conta>();
     private static final String CODIGOFIXO = "CONTA";
     private static final String DESCRICAOFIXA = "Conta bancária";
 
@@ -11,6 +15,7 @@ public class Conta extends Produto {
         this.tipo = tipo;
         this.banco = banco;
         this.saldo = 0.0;
+        this.contas.add(this);
     }
 
     public Banco getBanco(){
@@ -36,7 +41,6 @@ public class Conta extends Produto {
     public void sacar(Double valor){
         this.saldo -= valor;
     }
-
 
     public void transferir(Conta conta, Double valor){
         this.sacar(valor);

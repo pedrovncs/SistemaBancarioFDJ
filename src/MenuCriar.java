@@ -1,3 +1,4 @@
+import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class MenuCriar extends TerminalOption {
@@ -13,6 +14,7 @@ public class MenuCriar extends TerminalOption {
             System.out.println("4 - Conta");
             System.out.println("5 - Cartão");
             System.out.println("6 - Cheque especial");
+            System.out.println("7 - Empresa");
             System.out.println("0 - Voltar");
             selected = scanner.nextLine();
             switch (selected) {
@@ -51,6 +53,27 @@ public class MenuCriar extends TerminalOption {
                     System.out.println("Digite o cpf do cliente");
                     String cpf = scanner.nextLine();
                     Cliente cliente = new Cliente(nome, cpf);
+                    System.out.println("O cliente é funcionário de alguma empresa? (s/n)");
+                    String resposta = scanner.nextLine();
+                    if (resposta.equals("s")) {
+                        if (Empresa.empresas.isEmpty()) {
+                            System.out.println("\n Não há empresas cadastradas \n");
+                            break;
+                        }
+                        System.out.println("Selecione a empresa: ");
+                        for (int i = 0; i < Empresa.empresas.size(); i++) {
+                            System.out.println(i + 1 + " - " + Empresa.empresas.get(i).getNome());
+                        }
+                        System.out.println("0 - Voltar");
+                        selected = scanner.nextLine();
+                        if (selected.equals("0")) {
+                            System.out.println("-> Retorno a tela anterior");
+                            break;
+                        }
+                        Empresa empresa = Empresa.empresas.get(Integer.parseInt(selected) - 1);
+                        cliente.setEmpresa(empresa);
+                        empresa.addFuncionario(cliente);
+                    }
                     System.out.println("\n Cliente criado com sucesso! \n");
                     break;
                 }
@@ -186,7 +209,17 @@ public class MenuCriar extends TerminalOption {
                     System.out.println("\n Cheque especial criado com sucesso! \n");
                     break;
                 }
-
+                case "7": {
+                    System.out.println("Digite o nome da empresa: ");
+                    String nome = scanner.nextLine();
+                    System.out.println("Digite o cnpj da empresa: ");
+                    String cnpj = scanner.nextLine();
+                    System.out.println("Digite o endereço da empresa: ");
+                    String endereco = scanner.nextLine();
+                    Empresa empresa = new Empresa(nome,cnpj,endereco);
+                    System.out.println("\n Empresa criada com sucesso! \n");
+                    break;
+                }
                 case "0":
                     System.out.println("\n -> Retorno a tela anterior \n");
                     break;

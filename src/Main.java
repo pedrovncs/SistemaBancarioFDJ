@@ -11,6 +11,7 @@ public class Main {
             System.out.println("2 - Menu Consultar");
             System.out.println("3 - Menu Remover");
             System.out.println("4 - Menu Ações");
+            System.out.println("5 - Criar Exemplo");
             System.out.println("0 - Sair");
             selected = scanner.nextLine();
             switch (selected) {
@@ -26,11 +27,17 @@ public class Main {
                     MenuRemover menuRemover = new MenuRemover();
                     menuRemover.executar(selected);
                     break;
+                case "4":
+                    MenuAcoes menuAcoes = new MenuAcoes();
+                    menuAcoes.executar(selected);
+                    break;
+                case "5": {
+                    Exemplo exemplo = new Exemplo();
+                    exemplo.executar();
+                    break;
+                }
                 case "0":
                     System.out.println("\n ENCERRADO \n");
-                    break;
-                case "4":
-                    System.out.println("AINDA NAO IMPLEMENTADO");
                     break;
                 default:
                     System.out.println("\n Opção inválida \n");

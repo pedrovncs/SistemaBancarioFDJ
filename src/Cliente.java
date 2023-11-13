@@ -4,6 +4,7 @@ import java.util.ArrayList;
 public class Cliente {
     private String nome;
     private String cpf;
+    private Empresa empresa;
     public static List<Cliente> clientes = new ArrayList<Cliente>();
     private List<Produto> produtos;
 
@@ -28,7 +29,9 @@ public class Cliente {
         this.addProduto(chequeEspecial);
         banco.addProduto(chequeEspecial);
     }
-
+    public void setEmpresa(Empresa empresa){
+        this.empresa = empresa;
+    }
     public void addProduto(Produto produto) {
         this.produtos.add(produto);
     }
@@ -40,5 +43,9 @@ public class Cliente {
     }
     public String getCpf(){
         return this.cpf;
+    }
+
+    public Empresa getEmpresa() {
+        return this.empresa;
     }
 }
